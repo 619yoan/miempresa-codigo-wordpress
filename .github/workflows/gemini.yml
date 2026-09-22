@@ -1,0 +1,40 @@
+name: Gemini AI
+
+on:
+  workflow_dispatch:
+    inputs:
+      tarea:
+        description: "¿Qué quieres que haga Gemini?"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  gemini:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Ejecutar Gemini
+        uses: google-github-actions/run-gemini-cli@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          prompt: |
+            Trabaja directamente sobre este repositorio.
+
+            Tarea solicitada por el usuario:
+            ${{ inputs.tarea }}
+
+            Reglas:
+            - Analiza primero el código existente.
+            - Realiza los cambios necesarios.
+            - No modifiques secretos ni archivos de configuración de GitHub Actions salvo que la tarea lo requiera explícitamente.
+            - Mantén la estructura actual del proyecto.
+            - Verifica que el código sea válido antes de terminar.
+            - Si modificas archivos, guarda los cambios en el repositorio.
