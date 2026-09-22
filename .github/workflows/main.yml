@@ -1,0 +1,31 @@
+name: CE Git Code Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validar y desplegar
+        env:
+          WP_DEPLOY_URL: ${{ secrets.WP_DEPLOY_URL }}
+          WP_DEPLOY_SECRET: ${{ secrets.WP_DEPLOY_SECRET }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          python3 tools/deploy.py
