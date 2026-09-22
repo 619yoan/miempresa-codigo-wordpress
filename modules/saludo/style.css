@@ -1,0 +1,7 @@
+.cegc-welcome { max-width: 680px; margin: 24px auto; padding: clamp(24px, 5vw, 48px); color: #f5f2ff; background: #201332; border-radius: 24px; font-family: system-ui, sans-serif; }
+.cegc-welcome .cegc-welcome__eyebrow { color: #c6b7ff; font-size: 11px; letter-spacing: .12em; }
+.cegc-welcome h2 { color: #fff; margin: 16px 0; font-size: clamp(28px, 5vw, 42px); }
+.cegc-welcome p { line-height: 1.6; }
+.cegc-welcome .cegc-welcome__button { background: #c8ff79; color: #192509; padding: 12px 20px; border: 0; border-radius: 10px; cursor: pointer; font-weight: 700; }
+.cegc-welcome .cegc-welcome__button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.cegc-welcome .cegc-welcome__message { min-height: 1.6em; margin-bottom: 0; }

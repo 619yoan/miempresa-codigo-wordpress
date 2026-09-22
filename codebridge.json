@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "modules": [
+    {
+      "id": "saludo",
+      "name": "Tarjeta de bienvenida",
+      "entry": "modules/saludo/render.php",
+      "css": ["modules/saludo/style.css"],
+      "js": ["modules/saludo/script.js"]
+    }
+  ]
+}
