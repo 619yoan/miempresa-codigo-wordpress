@@ -14,7 +14,7 @@ permissions:
 jobs:
   gemini:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
       - name: Descargar repositorio
@@ -27,24 +27,19 @@ jobs:
           GEMINI_CLI_TRUST_WORKSPACE: "true"
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-
-          settings: |-
-            {
-              "model": {
-                "maxSessionTurns": 5
-              }
-            }
+          gemini_debug: "true"
 
           prompt: |
-            Trabaja directamente sobre este repositorio.
+            Analiza este repositorio.
 
             Tarea solicitada por el usuario:
             ${{ inputs.tarea }}
 
             Reglas:
             - Analiza primero el código existente.
-            - Realiza los cambios necesarios.
-            - No modifiques secretos ni archivos de configuración de GitHub Actions salvo que la tarea lo requiera explícitamente.
+            - Realiza los cambios necesarios si la tarea los solicita.
+            - No modifiques secretos.
+            - No modifiques archivos de configuración de GitHub Actions salvo que la tarea lo requiera explícitamente.
             - Mantén la estructura actual del proyecto.
             - Verifica que el código sea válido antes de terminar.
             - Si modificas archivos, guarda los cambios en el repositorio.
