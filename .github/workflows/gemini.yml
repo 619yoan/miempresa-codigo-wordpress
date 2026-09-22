@@ -14,6 +14,7 @@ permissions:
 jobs:
   gemini:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Descargar repositorio
@@ -26,6 +27,14 @@ jobs:
           GEMINI_CLI_TRUST_WORKSPACE: "true"
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+
+          settings: |-
+            {
+              "model": {
+                "maxSessionTurns": 5
+              }
+            }
+
           prompt: |
             Trabaja directamente sobre este repositorio.
 
